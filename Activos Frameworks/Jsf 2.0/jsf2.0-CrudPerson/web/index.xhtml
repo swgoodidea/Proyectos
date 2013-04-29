@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <h:panelGroup>
+                <table>
+                    <tr>
+                        <td>
+                            <h:outputText value="Nombres"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{personManagedBean.personSession.secondName}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputText value="Apellidos"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{personManagedBean.personSession.firstName}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputText value="Edad"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{personManagedBean.personSession.age}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h:outputText value="Direccion"/>
+                        </td>
+                        <td>
+                            <h:inputText value="#{personManagedBean.personSession.address}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="right">
+                            <h:commandButton value="Guardar" id="submit" actionListener="#{personManagedBean.savePerson()}" rendered="true" action="response">
+                            </h:commandButton>
+                            <h:commandButton value="Limpiar" actionListener="#{personManagedBean.resetViewOperation()}" rendered="true" action="index">
+                            </h:commandButton>
+                        </td>
+                    </tr>
+                </table>
+            </h:panelGroup>
+            <h:panelGroup rendered="#{not empty personManagedBean.personList}">
+                <h:dataTable value="#{personManagedBean.personList}" var="person">
+                    <h:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Nombres"/>  
+                        </f:facet>
+                        <h:outputText value="#{person.firstName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Apellidos"/>  
+                        </f:facet>
+                        <h:outputText value="#{person.secondName}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Edad"/>  
+                        </f:facet>
+                        <h:outputText value="#{person.age}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Direccion"/>  
+                        </f:facet>
+                        <h:outputText value="#{person.address}" />
+                    </h:column>
+                    <h:column>
+                        <f:facet name="header">  
+                            <h:outputText value="Opciones"/>  
+                        </f:facet>
+                        <h:commandLink value="MODIFICAR" style="color:blue" actionListener="#{personManagedBean.selectPersonObjectModified(person)}"/>
+                        <h:outputText value="-" />
+                        <h:commandLink value="ELIMINAR" style="color:blue" actionListener="#{personManagedBean.selectPersonObjectDelete(person)}" action="response"/>
+                    </h:column>
+                </h:dataTable>
+            </h:panelGroup>
+        </h:form>
+    </h:body>
+</html>
